@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "Twitch AI Translator",
+    "version": "1.0.0",
+    "icons": {
+        "32": "32.png"
+    },
+    "action": {
+        "default_popup": "index.html"
+    },
+    "permissions": [
+        "scripting"
+    ],
+    "host_permissions": [
+        "https://www.twitch.tv/*"
+    ]
+}
