@@ -1,18 +1,16 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+import "./App.css";
+import { useState, useEffect } from "react";
+import { data } from "./data/countries";
 
 function App() {
-  const [countries, setCountries] = useState([])
+  const [countries, setCountries] = useState([]);
+  const [to, setTo] = useState("");
+  const [from, setFrom] = useState("");
+  const [isTranslating, setIsTranslating] = useState(false);
 
-  const fetchCountries = async () => {
-    const res = await fetch('https://pkgstore.datahub.io/core/country-list/data_json/data/8c458f2d15d9f2119654b29ede6e45b8/data_json.json')
-    const result = await res.json()
-    setCountries(result)
-  }
-
-  useEffect(()=>{
-    fetchCountries()
-  },[])
+  useEffect(() => {
+    setCountries(data);
+  }, []);
 
   return (
     <>
@@ -20,21 +18,31 @@ function App() {
       <p>Talk to your favorite streamer in their own language!</p>
       <div className="card">
         <span>From: </span>
-        <select name="countries" id="countries">
-          {countries.map(country=>(
-            <option key={country.Name} value={country.Name}>{country.Code}</option>
+        <select
+          name="from-countries"
+          id="from-countries"
+          value={from}
+          onChange={(e) => setFrom(e.target.value)}
+        >
+          {countries.map((country) => (
+            <option value={country.language}>{country.emoji}</option>
           ))}
         </select>
-        <span>To:</span>
-        <select name="countries" id="countries">
-          {countries.map(country=>(
-            <option key={country.Name} value={country.Name}>{country.Code}</option>
+        <span>To: </span>
+        <select
+          name="to-countries"
+          id="to-countries"
+          value={to}
+          onChange={(e) => setTo(e.target.value)}
+        >
+          {countries.map((country) => (
+            <option value={country.language}>{country.emoji}</option>
           ))}
         </select>
         <button>Start Translating</button>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
