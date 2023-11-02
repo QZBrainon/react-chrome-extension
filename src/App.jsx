@@ -13,16 +13,16 @@ function App() {
     setCountries(data);
   }, []);
 
-  const onTranslate = async () => {
+  async function onTranslate() {
     let [tab] = await chrome.tabs.query({ active: true });
-    console.log(tab, tab.id);
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
       func: () => {
-        alert("hi");
+        const text = document.querySelector('span[data-slate-string="true"]');
+        console.log(text);
       },
     });
-  };
+  }
 
   return (
     <>
