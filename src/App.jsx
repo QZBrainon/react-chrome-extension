@@ -7,10 +7,22 @@ function App() {
   const [to, setTo] = useState("");
   const [from, setFrom] = useState("");
   const [isTranslating, setIsTranslating] = useState(false);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     setCountries(data);
   }, []);
+
+  const onTranslate = async () => {
+    let [tab] = await chrome.tabs.query({ active: true });
+    console.log(tab, tab.id);
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: () => {
+        alert("hi");
+      },
+    });
+  };
 
   return (
     <>
@@ -39,7 +51,7 @@ function App() {
             <option value={country.language}>{country.emoji}</option>
           ))}
         </select>
-        <button>Start Translating</button>
+        <button onClick={onTranslate}>Start Translating</button>
       </div>
     </>
   );

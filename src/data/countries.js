@@ -20,11 +20,6 @@ export const data = [
     emoji: "🇧🇷",
   },
   {
-    isoCode: "FR",
-    language: "French",
-    emoji: "🇫🇷",
-  },
-  {
     isoCode: "DE",
     language: "German",
     emoji: "🇩🇪",
